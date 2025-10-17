@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewmodels="clr-namespace:RoboStateResetUtility.ViewModels"
         mc:Ignorable="d"
         Title="VPOS State Reset Utility"
@@ -45,17 +44,10 @@
                                Margin="0,4,0,0"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <materialDesign:PackIcon Kind="Store"
-                                           Width="32"
-                                           Height="32"
-                                           Foreground="White"
-                                           Margin="0,0,16,0"/>
-                    <materialDesign:PackIcon Kind="Cash"
-                                           Width="32"
-                                           Height="32"
-                                           Foreground="White"/>
-                </StackPanel>
+                <TextBlock Grid.Column="1"
+                          Text="🏪💵"
+                          FontSize="32"
+                          VerticalAlignment="Center"/>
             </Grid>
         </Border>
 
@@ -72,46 +64,27 @@
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,16,0">
                     <Button Command="{Binding ScanNetworkCommand}"
                             IsEnabled="{Binding IsScanning, Converter={StaticResource InverseBooleanConverter}}"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            materialDesign:ButtonAssist.CornerRadius="8"
+                            Style="{StaticResource ModernButton}"
                             Height="40"
                             Padding="24,0"
-                            Background="{StaticResource FujitsuBlueBrush}"
-                            BorderBrush="{StaticResource FujitsuBlueBrush}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Refresh"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,8,0"/>
-                            <TextBlock Text="Scan Network" VerticalAlignment="Center"/>
-                        </StackPanel>
+                            Background="{StaticResource FujitsuBlueBrush}">
+                        <TextBlock Text="🔄 Scan Network" VerticalAlignment="Center"/>
                     </Button>
 
                     <Button Command="{Binding SelectAllCommand}"
-                            Style="{StaticResource MaterialDesignOutlinedButton}"
-                            materialDesign:ButtonAssist.CornerRadius="8"
+                            Style="{StaticResource OutlinedButton}"
                             Height="40"
                             Padding="16,0"
                             Margin="8,0,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="CheckAll"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,8,0"/>
-                            <TextBlock Text="Select All" VerticalAlignment="Center"/>
-                        </StackPanel>
+                        <TextBlock Text="☑ Select All" VerticalAlignment="Center"/>
                     </Button>
 
                     <Button Command="{Binding DeselectAllCommand}"
-                            Style="{StaticResource MaterialDesignOutlinedButton}"
-                            materialDesign:ButtonAssist.CornerRadius="8"
+                            Style="{StaticResource OutlinedButton}"
                             Height="40"
                             Padding="16,0"
                             Margin="8,0,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="CheckboxBlankOutline"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,8,0"/>
-                            <TextBlock Text="Deselect All" VerticalAlignment="Center"/>
-                        </StackPanel>
+                        <TextBlock Text="☐ Deselect All" VerticalAlignment="Center"/>
                     </Button>
                 </StackPanel>
 
@@ -121,40 +94,28 @@
                                VerticalAlignment="Center"
                                Margin="0,0,8,0"
                                FontWeight="SemiBold"/>
-                    <ComboBox SelectedValue="{Binding NewResetValue}"
-                              Width="80"
-                              materialDesign:ComboBoxAssist.ShowSelectedItem="True"
-                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="0">0</ComboBoxItem>
-                            <ComboBoxItem Content="1">1</ComboBoxItem>
-                        </ComboBox.Items>
+                    <ComboBox SelectedItem="{Binding NewResetValue}"
+                              Width="80">
+                        <sys:Int32 xmlns:sys="clr-namespace:System;assembly=mscorlib">0</sys:Int32>
+                        <sys:Int32 xmlns:sys="clr-namespace:System;assembly=mscorlib">1</sys:Int32>
                     </ComboBox>
 
                     <Button Command="{Binding ResetSelectedCommand}"
                             IsEnabled="{Binding IsProcessing, Converter={StaticResource InverseBooleanConverter}}"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            materialDesign:ButtonAssist.CornerRadius="8"
+                            Style="{StaticResource ModernButton}"
                             Height="40"
                             Padding="24,0"
                             Margin="16,0,0,0"
-                            Background="{StaticResource SuccessGreenBrush}"
-                            BorderBrush="{StaticResource SuccessGreenBrush}">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Send"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,8,0"/>
-                            <TextBlock Text="Reset Selected" VerticalAlignment="Center" FontWeight="Bold"/>
-                        </StackPanel>
+                            Background="{StaticResource SuccessGreenBrush}">
+                        <TextBlock Text="✓ Reset Selected" VerticalAlignment="Center" FontWeight="Bold"/>
                     </Button>
 
                     <Button Command="{Binding OpenLogFileCommand}"
-                            Style="{StaticResource MaterialDesignOutlinedButton}"
-                            materialDesign:ButtonAssist.CornerRadius="8"
+                            Style="{StaticResource OutlinedButton}"
                             Height="40"
                             Padding="16,0"
                             Margin="8,0,0,0">
-                        <materialDesign:PackIcon Kind="FileDocument" VerticalAlignment="Center"/>
+                        <TextBlock Text="📄" VerticalAlignment="Center"/>
                     </Button>
                 </StackPanel>
             </Grid>
@@ -181,15 +142,18 @@
                                    Style="{StaticResource SubheaderText}"
                                    VerticalAlignment="Center"/>
                         <Button Command="{Binding ExpandAllCommand}"
-                                Style="{StaticResource MaterialDesignToolButton}"
+                                Style="{StaticResource OutlinedButton}"
                                 ToolTip="Expand All"
+                                Padding="4"
                                 Margin="8,0,0,0">
-                            <materialDesign:PackIcon Kind="UnfoldMoreHorizontal"/>
+                            <TextBlock Text="⇊"/>
                         </Button>
                         <Button Command="{Binding CollapseAllCommand}"
-                                Style="{StaticResource MaterialDesignToolButton}"
-                                ToolTip="Collapse All">
-                            <materialDesign:PackIcon Kind="UnfoldLessHorizontal"/>
+                                Style="{StaticResource OutlinedButton}"
+                                ToolTip="Collapse All"
+                                Padding="4"
+                                Margin="4,0,0,0">
+                            <TextBlock Text="⇈"/>
                         </Button>
                     </StackPanel>
 
@@ -217,25 +181,26 @@
                                                               Margin="0,0,12,0"/>
 
                                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                                        <materialDesign:PackIcon Kind="Store"
-                                                                               Width="24"
-                                                                               Height="24"
-                                                                               Foreground="{StaticResource LondonDrugsRedBrush}"
-                                                                               VerticalAlignment="Center"
-                                                                               Margin="0,0,8,0"/>
+                                                        <TextBlock Text="🏪"
+                                                                   FontSize="20"
+                                                                   VerticalAlignment="Center"
+                                                                   Margin="0,0,8,0"/>
                                                         <TextBlock Text="{Binding DisplayName}"
                                                                    FontSize="16"
                                                                    FontWeight="SemiBold"
                                                                    VerticalAlignment="Center"/>
                                                     </StackPanel>
 
-                                                    <StackPanel Grid.Column="2" Orientation="Horizontal">
-                                                        <materialDesign:Chip Content="{Binding AccessibleCheckoutsCount}"
-                                                                           Background="{StaticResource FujitsuBlueBrush}"
-                                                                           Foreground="White"
-                                                                           FontSize="12"
-                                                                           Margin="8,0"/>
-                                                    </StackPanel>
+                                                    <Border Grid.Column="2"
+                                                            Background="{StaticResource FujitsuBlueBrush}"
+                                                            CornerRadius="10"
+                                                            Padding="8,2"
+                                                            Margin="8,0">
+                                                        <TextBlock Text="{Binding AccessibleCheckoutsCount}"
+                                                                   Foreground="White"
+                                                                   FontSize="12"
+                                                                   FontWeight="Bold"/>
+                                                    </Border>
                                                 </Grid>
                                             </Expander.Header>
 
@@ -260,21 +225,21 @@
                                                                           Margin="0,0,12,0"/>
 
                                                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                                                    <materialDesign:PackIcon Kind="Cash"
-                                                                                           Width="20"
-                                                                                           Height="20"
-                                                                                           VerticalAlignment="Center"
-                                                                                           Margin="0,0,8,0"/>
+                                                                    <TextBlock Text="💵"
+                                                                               FontSize="16"
+                                                                               VerticalAlignment="Center"
+                                                                               Margin="0,0,8,0"/>
                                                                     <TextBlock Text="{Binding DisplayName}"
                                                                                VerticalAlignment="Center"
                                                                                FontSize="14"/>
                                                                 </StackPanel>
 
                                                                 <TextBlock Grid.Column="2"
-                                                                           Text="{Binding Status}"
-                                                                           Foreground="{Binding StatusColor}"
-                                                                           FontSize="12"
-                                                                           VerticalAlignment="Center"/>
+                                                                           Text="{Binding Status}">
+                                                                    <TextBlock.Foreground>
+                                                                        <SolidColorBrush Color="{Binding StatusColor}"/>
+                                                                    </TextBlock.Foreground>
+                                                                </TextBlock>
                                                             </Grid>
                                                         </Border>
                                                     </DataTemplate>
@@ -298,11 +263,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
-                        <materialDesign:PackIcon Kind="InformationOutline"
-                                               Width="20"
-                                               Height="20"
-                                               VerticalAlignment="Center"
-                                               Margin="0,0,8,0"/>
+                        <TextBlock Text="ℹ️" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBlock Text="Activity Log" Style="{StaticResource SubheaderText}"/>
                     </StackPanel>
 
@@ -336,10 +297,10 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Information"
-                                           VerticalAlignment="Center"
-                                           Margin="0,0,8,0"
-                                           Foreground="{StaticResource FujitsuBlueBrush}"/>
+                    <TextBlock Text="ℹ️"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"
+                               Foreground="{StaticResource FujitsuBlueBrush}"/>
                     <TextBlock Text="{Binding StatusMessage}"
                                VerticalAlignment="Center"
                                FontWeight="Medium"/>

@@ -14,8 +14,8 @@ Download and install the **.NET 8.0 Desktop Runtime**:
 Open a terminal in the project folder and run:
 
 ```bash
-dotnet restore
-dotnet build --configuration Release
+dotnet restore RoboStateResetUtility.sln
+dotnet build RoboStateResetUtility.sln --configuration Release
 ```
 
 The executable will be at: `bin\Release\net8.0-windows\RoboStateResetUtility.exe`

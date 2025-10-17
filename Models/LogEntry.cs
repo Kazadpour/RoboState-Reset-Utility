@@ -1,3 +1,5 @@
+using System;
+
 namespace RoboStateResetUtility.Models;
 
 public class LogEntry
