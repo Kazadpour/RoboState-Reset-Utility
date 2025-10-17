@@ -1,15 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(tree:*)",
-      "Bash(dir:*)",
-      "Bash(dotnet new:*)",
-      "Bash(dotnet sln:*)",
-      "Bash(dotnet restore:*)",
-      "Bash(dotnet build:*)",
-      "Bash(dotnet run:*)",
-      "Bash(timeout 10 dotnet run:*)",
-      "Bash(dotnet clean:*)"
+      "Bash(powershell:*)"
     ],
     "deny": [],
     "ask": []
