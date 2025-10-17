@@ -1,94 +1,125 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Colors with Transparency for Glass Effect -->
-    <Color x:Key="LondonDrugsRed">#E31837</Color>
-    <Color x:Key="FujitsuBlue">#0033A0</Color>
-    <Color x:Key="DarkBackground">#0A0A0F</Color>
-    <Color x:Key="DarkerBackground">#15151F</Color>
-    <Color x:Key="GlassBackground">#30FFFFFF</Color>
-    <Color x:Key="GlassBorder">#50FFFFFF</Color>
-    <Color x:Key="LightText">#FFFFFF</Color>
-    <Color x:Key="SuccessGreen">#4CAF50</Color>
+    <!-- Modern Minimalist Theme -->
+
+    <!-- Core Colors -->
+    <Color x:Key="BgBase">#FAFAFA</Color>
+    <Color x:Key="BgPanel">#FFFFFF</Color>
+    <Color x:Key="BgPanelAlt">#F5F5F5</Color>
+
+    <!-- Modern accent colors -->
+    <Color x:Key="NeonCyan">#2196F3</Color>
+    <Color x:Key="NeonMagenta">#9C27B0</Color>
+    <Color x:Key="NeonYellow">#FFC107</Color>
+    <Color x:Key="NeonGreen">#4CAF50</Color>
+
+    <Color x:Key="LinkBlue">#2196F3</Color>
+    <Color x:Key="VisitedPurple">#9C27B0</Color>
+
+    <Color x:Key="LightText">#212121</Color>
+    <Color x:Key="MutedText">#757575</Color>
     <Color x:Key="ErrorRed">#F44336</Color>
+
+    <!-- Brand colors -->
+    <Color x:Key="LondonDrugsRed">#D32F2F</Color>
+    <Color x:Key="FujitsuBlue">#1976D2</Color>
+    <Color x:Key="DarkBackground">#FAFAFA</Color>
+    <Color x:Key="DarkerBackground">#F5F5F5</Color>
+    <Color x:Key="GlassBackground">#FFFFFF</Color>
+    <Color x:Key="GlassBorder">#E0E0E0</Color>
+    <Color x:Key="SuccessGreen">#4CAF50</Color>
     <Color x:Key="WarningOrange">#FF9800</Color>
 
     <!-- Brushes -->
-    <SolidColorBrush x:Key="LondonDrugsRedBrush" Color="{StaticResource LondonDrugsRed}" />
-    <SolidColorBrush x:Key="FujitsuBlueBrush" Color="{StaticResource FujitsuBlue}" />
-    <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{StaticResource DarkBackground}" />
-    <SolidColorBrush x:Key="DarkerBackgroundBrush" Color="{StaticResource DarkerBackground}" />
-    <SolidColorBrush x:Key="GlassBackgroundBrush" Color="{StaticResource GlassBackground}" />
-    <SolidColorBrush x:Key="GlassBorderBrush" Color="{StaticResource GlassBorder}" />
-    <SolidColorBrush x:Key="LightTextBrush" Color="{StaticResource LightText}" />
-    <SolidColorBrush x:Key="SuccessGreenBrush" Color="{StaticResource SuccessGreen}" />
-    <SolidColorBrush x:Key="ErrorRedBrush" Color="{StaticResource ErrorRed}" />
-    <SolidColorBrush x:Key="WarningOrangeBrush" Color="{StaticResource WarningOrange}" />
+    <SolidColorBrush x:Key="BgBaseBrush" Color="{StaticResource BgBase}"/>
+    <SolidColorBrush x:Key="BgPanelBrush" Color="{StaticResource BgPanel}"/>
+    <SolidColorBrush x:Key="BgPanelAltBrush" Color="{StaticResource BgPanelAlt}"/>
 
-    <!-- Glass Card Style with Frosted Effect -->
+    <SolidColorBrush x:Key="NeonCyanBrush" Color="{StaticResource NeonCyan}"/>
+    <SolidColorBrush x:Key="NeonMagentaBrush" Color="{StaticResource NeonMagenta}"/>
+    <SolidColorBrush x:Key="NeonYellowBrush" Color="{StaticResource NeonYellow}"/>
+    <SolidColorBrush x:Key="NeonGreenBrush" Color="{StaticResource NeonGreen}"/>
+
+    <SolidColorBrush x:Key="LinkBlueBrush" Color="{StaticResource LinkBlue}"/>
+    <SolidColorBrush x:Key="VisitedPurpleBrush" Color="{StaticResource VisitedPurple}"/>
+
+    <SolidColorBrush x:Key="LightTextBrush" Color="{StaticResource LightText}"/>
+    <SolidColorBrush x:Key="MutedTextBrush" Color="{StaticResource MutedText}"/>
+    <SolidColorBrush x:Key="ErrorRedBrush" Color="{StaticResource ErrorRed}"/>
+    <SolidColorBrush x:Key="SuccessGreenBrush" Color="{StaticResource SuccessGreen}"/>
+    <SolidColorBrush x:Key="WarningOrangeBrush" Color="{StaticResource WarningOrange}"/>
+
+    <!-- Legacy alias brushes (keys used by existing XAML) -->
+    <SolidColorBrush x:Key="LondonDrugsRedBrush" Color="{StaticResource LondonDrugsRed}"/>
+    <SolidColorBrush x:Key="FujitsuBlueBrush" Color="{StaticResource FujitsuBlue}"/>
+    <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{StaticResource DarkBackground}"/>
+    <SolidColorBrush x:Key="DarkerBackgroundBrush" Color="{StaticResource DarkerBackground}"/>
+    <SolidColorBrush x:Key="GlassBackgroundBrush" Color="{StaticResource GlassBackground}"/>
+    <SolidColorBrush x:Key="GlassBorderBrush" Color="{StaticResource GlassBorder}"/>
+
+    <!-- Clean background (no texture) -->
+    <SolidColorBrush x:Key="ScanlineBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="VignetteBrush" Color="Transparent"/>
+
+    <!-- Modern Header Gradient (subtle blue) -->
+    <LinearGradientBrush x:Key="RetroHeaderBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#1976D2" Offset="0"/>
+        <GradientStop Color="#1565C0" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Typography helpers -->
+    <Style x:Key="HeaderText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <Style x:Key="SubheaderText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        <Setter Property="Margin" Value="0,4,0,4"/>
+    </Style>
+
+    <!-- Modern Card -->
     <Style x:Key="CustomCard" TargetType="Border">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#35FFFFFF" Offset="0"/>
-                    <GradientStop Color="#20FFFFFF" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="16" />
-        <Setter Property="Padding" Value="20" />
-        <Setter Property="Margin" Value="8" />
+        <Setter Property="Background" Value="{StaticResource BgPanelBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}"/>
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.5" Color="#000000"/>
+                <DropShadowEffect BlurRadius="16" ShadowDepth="4" Color="#20000000" Opacity="0.15" Direction="270"/>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!-- Header Text Style -->
-    <Style x:Key="HeaderText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="24" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
-        <Setter Property="Margin" Value="0,0,0,16" />
-    </Style>
-
-    <!-- Subheader Text Style -->
-    <Style x:Key="SubheaderText" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
-        <Setter Property="Margin" Value="0,8,0,8" />
-    </Style>
-
-    <!-- Modern Glass Button Styles -->
-    <Style x:Key="ModernButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource FujitsuBlueBrush}" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="24,8" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Cursor" Value="Hand" />
+    <!-- Link Button -->
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource LinkBlueBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            CornerRadius="10"
-                            Padding="{TemplateBinding Padding}">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.5" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.(SolidColorBrush.Color)}"/>
-                        </Border.Effect>
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                    <TextBlock TextDecorations="Underline"
+                               Foreground="{TemplateBinding Foreground}"
+                               TextAlignment="Center">
+                        <ContentPresenter/>
+                    </TextBlock>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.85"/>
+                            <Setter Property="Foreground" Value="{StaticResource FujitsuBlueBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.4"/>
+                            <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -96,38 +127,37 @@
         </Setter>
     </Style>
 
-    <Style x:Key="OutlinedButton" TargetType="Button">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="#20FFFFFF"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="16,8" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Cursor" Value="Hand" />
+    <!-- Modern Primary Button -->
+    <Style x:Key="ModernButton" TargetType="Button">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Padding" Value="24,10"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10"
-                            Padding="{TemplateBinding Padding}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Border x:Name="Bg"
+                            CornerRadius="6"
+                            Background="{TemplateBinding Background}">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="8" ShadowDepth="2" Color="#20000000" Opacity="0.2" Direction="270"/>
+                        </Border.Effect>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background">
+                            <Setter TargetName="Bg" Property="Opacity" Value="0.9"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bg" Property="RenderTransform">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="#40FFFFFF"/>
+                                    <TranslateTransform Y="1"/>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.4"/>
+                            <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -135,44 +165,74 @@
         </Setter>
     </Style>
 
-    <!-- Glass TextBox Style -->
-    <Style x:Key="GlassTextBox" TargetType="TextBox">
-        <Setter Property="Background">
+    <!-- Modern Outlined Button -->
+    <Style x:Key="OutlinedButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="20,8"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
             <Setter.Value>
-                <SolidColorBrush Color="#25FFFFFF"/>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bg"
+                            CornerRadius="6"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource GlassBorderBrush}"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bg" Property="Background" Value="#F0F0F0"/>
+                            <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CaretBrush" Value="White" />
+    </Style>
+
+    <!-- Modern TextBox -->
+    <Style x:Key="GlassTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                    <Border Name="border"
+                            CornerRadius="6"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="10"
-                            Padding="{TemplateBinding Padding}">
-                        <ScrollViewer x:Name="PART_ContentHost"
-                                      VerticalAlignment="Center"
-                                      Margin="0"/>
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ScrollViewer Margin="0"
+                                          x:Name="PART_ContentHost"
+                                          Focusable="false"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          Padding="{TemplateBinding Padding}"/>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="#35FFFFFF"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#757575"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="{StaticResource FujitsuBlueBrush}" />
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="#40FFFFFF"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#1976D2"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.6"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -180,82 +240,71 @@
         </Setter>
     </Style>
 
-    <!-- ComboBox Glass Style -->
+    <!-- Modern ComboBox -->
     <Style TargetType="ComboBox">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="#25FFFFFF"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12,8"/>
     </Style>
 
-    <!-- CheckBox Style -->
+    <!-- Modern CheckBox -->
     <Style TargetType="CheckBox">
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
     </Style>
 
-    <!-- ProgressBar Style -->
+    <!-- Modern ProgressBar -->
     <Style TargetType="ProgressBar">
-        <Setter Property="Background" Value="#333333" />
-        <Setter Property="Foreground" Value="{StaticResource FujitsuBlueBrush}" />
-        <Setter Property="Height" Value="4" />
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="Background" Value="#E0E0E0"/>
+        <Setter Property="Foreground" Value="{StaticResource FujitsuBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
-    <!-- ScrollViewer Style -->
+    <!-- ScrollViewer defaults -->
     <Style TargetType="ScrollViewer">
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
     </Style>
 
-    <!-- Expander Style -->
+    <!-- Modern Expander -->
     <Style TargetType="Expander">
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
     </Style>
 
-    <!-- ToggleSwitch Style -->
+    <!-- Modern ToggleSwitch -->
     <Style x:Key="ToggleSwitch" TargetType="ToggleButton">
-        <Setter Property="Width" Value="60"/>
+        <Setter Property="Width" Value="52"/>
         <Setter Property="Height" Value="28"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="#25FFFFFF"/>
+        <Setter Property="Background" Value="#BDBDBD"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid>
-                        <!-- Track -->
-                        <Border x:Name="Track"
-                                CornerRadius="14"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{StaticResource GlassBorderBrush}"
-                                BorderThickness="1"/>
-                        <!-- Thumb -->
-                        <Border x:Name="Thumb"
-                                Width="24"
-                                Height="24"
-                                CornerRadius="12"
-                                Background="White"
-                                Margin="2"
-                                HorizontalAlignment="Left">
+                        <Border x:Name="Track" CornerRadius="14" Background="{TemplateBinding Background}">
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" Opacity="0.4"/>
+                                <DropShadowEffect BlurRadius="4" ShadowDepth="1" Color="#20000000" Opacity="0.15" Direction="270"/>
+                            </Border.Effect>
+                        </Border>
+                        <Border x:Name="Thumb" Width="24" Height="24" CornerRadius="12" Background="White" Margin="2" HorizontalAlignment="Left">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="4" ShadowDepth="2" Color="#40000000" Opacity="0.25" Direction="270"/>
                             </Border.Effect>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Track" Property="Background" Value="{StaticResource SuccessGreenBrush}"/>
+                            <Setter TargetName="Track" Property="Background" Value="{StaticResource FujitsuBlueBrush}"/>
                             <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.4"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Track" Property="Opacity" Value="0.9"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

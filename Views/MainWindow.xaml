@@ -9,22 +9,17 @@
         Height="800"
         Width="1400"
         WindowStartupLocation="CenterScreen"
-        TextElement.Foreground="{StaticResource LightTextBrush}"
-        FontFamily="Segoe UI">
+        TextElement.Foreground="{StaticResource LightTextBrush}">
 
     <Window.DataContext>
         <viewmodels:MainViewModel />
     </Window.DataContext>
 
     <Window.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#0A0A0F" Offset="0"/>
-            <GradientStop Color="#1A1A2E" Offset="0.5"/>
-            <GradientStop Color="#0A0A0F" Offset="1"/>
-        </LinearGradientBrush>
+        <StaticResource ResourceKey="BgBaseBrush"/>
     </Window.Background>
 
-    <Grid Margin="16">
+    <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -33,7 +28,10 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" Style="{StaticResource CustomCard}" Background="{StaticResource LondonDrugsRedBrush}">
+        <Border Grid.Row="0" Background="{StaticResource RetroHeaderBrush}" Padding="32,24" Margin="0" CornerRadius="0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2" Color="#20000000" Opacity="0.15" Direction="270"/>
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -42,24 +40,23 @@
 
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="VPOS State Reset Utility"
-                               FontSize="28"
-                               FontWeight="Bold"
+                               FontSize="32"
+                               FontWeight="Light"
                                Foreground="White"/>
-                    <TextBlock Text="London Drugs × Fujitsu Self-Checkout Management"
+                    <TextBlock Text="London Drugs x Fujitsu Self-Checkout Management"
                                FontSize="14"
-                               Foreground="#E0E0E0"
-                               Margin="0,4,0,0"/>
+                               FontWeight="Normal"
+                               Foreground="#E3F2FD"
+                               Margin="0,6,0,0"/>
                 </StackPanel>
-
-                <TextBlock Grid.Column="1"
-                          Text="🏪💵"
-                          FontSize="32"
-                          VerticalAlignment="Center"/>
             </Grid>
         </Border>
 
         <!-- Control Panel -->
-        <Border Grid.Row="1" Style="{StaticResource CustomCard}">
+        <Border Grid.Row="1" Background="White" Padding="24,20" Margin="24,16,24,8" CornerRadius="12" BorderThickness="0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="16" ShadowDepth="4" Color="#20000000" Opacity="0.12" Direction="270"/>
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -68,16 +65,17 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Scan Controls -->
-                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,16,0">
-                    <TextBlock Text="Store Number:"
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,24,0">
+                    <TextBlock Text="Store Number"
                                VerticalAlignment="Center"
-                               Margin="0,0,8,0"
-                               FontWeight="SemiBold"/>
+                               Margin="0,0,12,0"
+                               FontSize="14"
+                               FontWeight="Medium"
+                               Foreground="{StaticResource MutedTextBrush}"/>
                     <TextBox Text="{Binding StoreNumber, UpdateSourceTrigger=PropertyChanged}"
-                             Width="80"
+                             Width="100"
                              Height="40"
                              VerticalContentAlignment="Center"
-                             Padding="8,0"
                              FontSize="14"
                              Style="{StaticResource GlassTextBox}"/>
 
@@ -85,94 +83,98 @@
                             IsEnabled="{Binding IsScanning, Converter={StaticResource InverseBooleanConverter}}"
                             Style="{StaticResource ModernButton}"
                             Height="40"
-                            Padding="24,0"
-                            Margin="12,0,0,0"
+                            Margin="16,0,0,0"
                             Background="{StaticResource FujitsuBlueBrush}">
-                        <TextBlock Text="🔍 Search Store" VerticalAlignment="Center"/>
+                        <TextBlock Text="Search Store" VerticalAlignment="Center" FontSize="14"/>
                     </Button>
 
                     <Button Command="{Binding SelectAllCommand}"
                             Style="{StaticResource OutlinedButton}"
                             Height="40"
-                            Padding="16,0"
-                            Margin="8,0,0,0">
-                        <TextBlock Text="☑ Select All" VerticalAlignment="Center"/>
+                            Margin="12,0,0,0">
+                        <TextBlock Text="Select All" VerticalAlignment="Center" FontSize="14"/>
                     </Button>
 
                     <Button Command="{Binding DeselectAllCommand}"
                             Style="{StaticResource OutlinedButton}"
                             Height="40"
-                            Padding="16,0"
                             Margin="8,0,0,0">
-                        <TextBlock Text="☐ Deselect All" VerticalAlignment="Center"/>
+                        <TextBlock Text="Deselect All" VerticalAlignment="Center" FontSize="14"/>
                     </Button>
                 </StackPanel>
 
                 <!-- Reset Value Control -->
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
-                    <TextBlock Text="Reset Value:"
+                    <TextBlock Text="Reset Value"
                                VerticalAlignment="Center"
-                               Margin="0,0,8,0"
-                               FontWeight="SemiBold"/>
+                               Margin="0,0,12,0"
+                               FontSize="14"
+                               FontWeight="Medium"
+                               Foreground="{StaticResource MutedTextBrush}"/>
                     <ToggleButton IsChecked="{Binding ResetValueEnabled}"
                                   Style="{StaticResource ToggleSwitch}"
                                   VerticalAlignment="Center"
-                                  Margin="0,0,8,0"/>
+                                  Margin="0,0,16,0"/>
 
                     <Button Command="{Binding ResetSelectedCommand}"
                             IsEnabled="{Binding IsProcessing, Converter={StaticResource InverseBooleanConverter}}"
                             Style="{StaticResource ModernButton}"
                             Height="40"
-                            Padding="24,0"
-                            Margin="16,0,0,0"
+                            Margin="8,0,0,0"
                             Background="{StaticResource SuccessGreenBrush}">
-                        <TextBlock Text="✓ Reset Selected" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock Text="Reset Selected" VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold"/>
                     </Button>
 
                     <Button Command="{Binding OpenLogFileCommand}"
                             Style="{StaticResource OutlinedButton}"
                             Height="40"
-                            Padding="16,0"
                             Margin="8,0,0,0">
-                        <TextBlock Text="📄" VerticalAlignment="Center"/>
+                        <TextBlock Text="Open Log" VerticalAlignment="Center" FontSize="14"/>
                     </Button>
                 </StackPanel>
             </Grid>
         </Border>
 
         <!-- Main Content -->
-        <Grid Grid.Row="2" Margin="8,0,8,8">
+        <Grid Grid.Row="2" Margin="24,0,24,16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="16"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Stores and Checkouts List -->
-            <Border Grid.Column="0" Style="{StaticResource CustomCard}">
+            <Border Grid.Column="0" Background="White" Padding="24" CornerRadius="12" BorderThickness="0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="16" ShadowDepth="4" Color="#20000000" Opacity="0.12" Direction="270"/>
+                </Border.Effect>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
                         <TextBlock Text="Stores &amp; Self-Checkouts"
-                                   Style="{StaticResource SubheaderText}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource LightTextBrush}"
                                    VerticalAlignment="Center"/>
                         <Button Command="{Binding ExpandAllCommand}"
                                 Style="{StaticResource OutlinedButton}"
                                 ToolTip="Expand All"
-                                Padding="4"
-                                Margin="8,0,0,0">
-                            <TextBlock Text="⇊"/>
+                                Height="32"
+                                Padding="12,6"
+                                Margin="16,0,0,0">
+                            <TextBlock Text="Expand" FontSize="13"/>
                         </Button>
                         <Button Command="{Binding CollapseAllCommand}"
                                 Style="{StaticResource OutlinedButton}"
                                 ToolTip="Collapse All"
-                                Padding="4"
-                                Margin="4,0,0,0">
-                            <TextBlock Text="⇈"/>
+                                Height="32"
+                                Padding="12,6"
+                                Margin="8,0,0,0">
+                            <TextBlock Text="Collapse" FontSize="13"/>
                         </Button>
                     </StackPanel>
 
@@ -180,10 +182,10 @@
                         <ItemsControl ItemsSource="{Binding Stores}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border BorderBrush="#404040"
+                                    <Border BorderBrush="#E0E0E0"
                                             BorderThickness="0,0,0,1"
-                                            Padding="8"
-                                            Margin="0,4">
+                                            Padding="12,8"
+                                            Margin="0,8,0,0">
                                         <Expander IsExpanded="{Binding IsExpanded}"
                                                   Background="Transparent">
                                             <Expander.Header>
@@ -200,36 +202,39 @@
                                                               Margin="0,0,12,0"/>
 
                                                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                                        <TextBlock Text="🏪"
-                                                                   FontSize="20"
+                                                        <TextBlock Text="Store "
+                                                                   FontSize="16"
+                                                                   FontWeight="Medium"
+                                                                   Foreground="{StaticResource MutedTextBrush}"
                                                                    VerticalAlignment="Center"
-                                                                   Margin="0,0,8,0"/>
+                                                                   Margin="0,0,4,0"/>
                                                         <TextBlock Text="{Binding DisplayName}"
                                                                    FontSize="16"
                                                                    FontWeight="SemiBold"
+                                                                   Foreground="{StaticResource LightTextBrush}"
                                                                    VerticalAlignment="Center"/>
                                                     </StackPanel>
 
                                                     <Border Grid.Column="2"
                                                             Background="{StaticResource FujitsuBlueBrush}"
-                                                            CornerRadius="10"
-                                                            Padding="8,2"
-                                                            Margin="8,0">
+                                                            CornerRadius="12"
+                                                            Padding="10,4"
+                                                            Margin="12,0">
                                                         <TextBlock Text="{Binding AccessibleCheckoutsCount}"
                                                                    Foreground="White"
-                                                                   FontSize="12"
-                                                                   FontWeight="Bold"/>
+                                                                   FontSize="13"
+                                                                   FontWeight="SemiBold"/>
                                                     </Border>
                                                 </Grid>
                                             </Expander.Header>
 
-                                            <ItemsControl ItemsSource="{Binding SelfCheckouts}" Margin="32,8,0,8">
+                                            <ItemsControl ItemsSource="{Binding SelfCheckouts}" Margin="40,12,0,8">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <Border BorderBrush="#303030"
+                                                        <Border BorderBrush="#F0F0F0"
                                                                 BorderThickness="0,0,0,1"
-                                                                Padding="8,4"
-                                                                Margin="0,2"
+                                                                Padding="12,8"
+                                                                Margin="0,4"
                                                                 Visibility="{Binding IsAccessible, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -245,17 +250,23 @@
                                                                           Margin="0,0,12,0"/>
 
                                                                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                                                    <TextBlock Text="💵"
-                                                                               FontSize="16"
+                                                                    <TextBlock Text="SCO "
+                                                                               FontSize="14"
+                                                                               FontWeight="Normal"
+                                                                               Foreground="{StaticResource MutedTextBrush}"
                                                                                VerticalAlignment="Center"
-                                                                               Margin="0,0,8,0"/>
+                                                                               Margin="0,0,4,0"/>
                                                                     <TextBlock Text="{Binding DisplayName}"
                                                                                VerticalAlignment="Center"
-                                                                               FontSize="14"/>
+                                                                               FontSize="14"
+                                                                               FontWeight="Medium"
+                                                                               Foreground="{StaticResource LightTextBrush}"/>
                                                                 </StackPanel>
 
                                                                 <TextBlock Grid.Column="2"
-                                                                           Text="{Binding Status}">
+                                                                           Text="{Binding Status}"
+                                                                           FontSize="13"
+                                                                           FontWeight="Medium">
                                                                     <TextBlock.Foreground>
                                                                         <SolidColorBrush Color="{Binding StatusColor}"/>
                                                                     </TextBlock.Foreground>
@@ -275,31 +286,36 @@
             </Border>
 
             <!-- Activity Log -->
-            <Border Grid.Column="2" Style="{StaticResource CustomCard}">
+            <Border Grid.Column="2" Background="White" Padding="24" CornerRadius="12" BorderThickness="0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="16" ShadowDepth="4" Color="#20000000" Opacity="0.12" Direction="270"/>
+                </Border.Effect>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
-                        <TextBlock Text="ℹ️" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBlock Text="Activity Log" Style="{StaticResource SubheaderText}"/>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
+                        <TextBlock Text="Activity Log"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource LightTextBrush}"/>
                     </StackPanel>
 
                     <ScrollViewer Grid.Row="1"
                                   VerticalScrollBarVisibility="Auto"
-                                  Background="#1A1A1A"
-                                  Padding="8">
+                                  Background="#FAFAFA"
+                                  Padding="12">
                         <ItemsControl ItemsSource="{Binding LogMessages}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}"
                                                FontFamily="Consolas"
-                                               FontSize="11"
-                                               Foreground="#B0B0B0"
+                                               FontSize="12"
+                                               Foreground="{StaticResource MutedTextBrush}"
                                                TextWrapping="Wrap"
-                                               Margin="0,2"/>
+                                               Margin="0,3"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -309,7 +325,10 @@
         </Grid>
 
         <!-- Status Bar -->
-        <Border Grid.Row="3" Style="{StaticResource CustomCard}" Background="{StaticResource DarkerBackgroundBrush}">
+        <Border Grid.Row="3" Background="White" Padding="24,16" Margin="24,8,24,16" CornerRadius="12" BorderThickness="0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="16" ShadowDepth="4" Color="#20000000" Opacity="0.12" Direction="270"/>
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -317,27 +336,25 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <TextBlock Text="ℹ️"
-                               VerticalAlignment="Center"
-                               Margin="0,0,8,0"
-                               Foreground="{StaticResource FujitsuBlueBrush}"/>
                     <TextBlock Text="{Binding StatusMessage}"
                                VerticalAlignment="Center"
-                               FontWeight="Medium"/>
+                               FontSize="14"
+                               FontWeight="Medium"
+                               Foreground="{StaticResource LightTextBrush}"/>
                 </StackPanel>
 
                 <ProgressBar Grid.Column="1"
                              Value="{Binding ProgressValue}"
                              Maximum="{Binding ProgressMaximum}"
-                             Width="200"
-                             Height="4"
+                             Width="240"
+                             Height="6"
                              Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}"
                              Foreground="{StaticResource SuccessGreenBrush}"/>
 
                 <ProgressBar Grid.Column="1"
                              IsIndeterminate="True"
-                             Width="200"
-                             Height="4"
+                             Width="240"
+                             Height="6"
                              Visibility="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}}"
                              Foreground="{StaticResource FujitsuBlueBrush}"/>
             </Grid>

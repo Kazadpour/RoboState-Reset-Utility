@@ -5,6 +5,17 @@
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!-- Modern, clean typography - using Segoe UI (default Windows font) -->
+            <FontFamily x:Key="ModernFont">Segoe UI</FontFamily>
+
+            <!-- Apply modern font across text and controls -->
+            <Style TargetType="{x:Type TextElement}">
+                <Setter Property="TextElement.FontFamily" Value="{StaticResource ModernFont}"/>
+            </Style>
+            <Style TargetType="{x:Type Control}">
+                <Setter Property="Control.FontFamily" Value="{StaticResource ModernFont}"/>
+            </Style>
+
             <!-- Converters -->
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
