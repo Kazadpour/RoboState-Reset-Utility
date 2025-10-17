@@ -114,11 +114,10 @@
                                VerticalAlignment="Center"
                                Margin="0,0,8,0"
                                FontWeight="SemiBold"/>
-                    <ComboBox SelectedItem="{Binding NewResetValue}"
-                              Width="80">
-                        <sys:Int32 xmlns:sys="clr-namespace:System;assembly=mscorlib">0</sys:Int32>
-                        <sys:Int32 xmlns:sys="clr-namespace:System;assembly=mscorlib">1</sys:Int32>
-                    </ComboBox>
+                    <ToggleButton IsChecked="{Binding ResetValueEnabled}"
+                                  Style="{StaticResource ToggleSwitch}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,8,0"/>
 
                     <Button Command="{Binding ResetSelectedCommand}"
                             IsEnabled="{Binding IsProcessing, Converter={StaticResource InverseBooleanConverter}}"
@@ -230,7 +229,8 @@
                                                         <Border BorderBrush="#303030"
                                                                 BorderThickness="0,0,0,1"
                                                                 Padding="8,4"
-                                                                Margin="0,2">
+                                                                Margin="0,2"
+                                                                Visibility="{Binding IsAccessible, Converter={StaticResource BooleanToVisibilityConverter}}">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="Auto"/>

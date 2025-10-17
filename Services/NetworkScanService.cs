@@ -18,6 +18,9 @@ public class NetworkScanService
     // Checkout ranges: 031-038 and 041-048
     private static readonly int[] CheckoutRanges = { 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43, 44 };
 
+    // Timeout used for probing network paths
+    private static readonly TimeSpan PathCheckTimeout = TimeSpan.FromSeconds(2);
+
     public NetworkScanService(LoggingService loggingService, ConfigurationService configurationService)
     {
         _loggingService = loggingService;
@@ -171,16 +174,13 @@ public class NetworkScanService
     }
 
     /// <summary>
-    /// Checks if a network path is accessible with a 5-second timeout
+    /// Checks if a network path is accessible, enforcing a timeout.
     /// </summary>
     private async Task<bool> CheckNetworkPathAsync(string networkPath)
     {
         try
         {
-            // Create a cancellation token with 5 second timeout
-            using var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(2));
-
-            return await Task.Run(() =>
+            var ioTask = Task.Run(() =>
             {
                 try
                 {
@@ -216,13 +216,17 @@ public class NetworkScanService
                     // Any other error
                     return false;
                 }
-            }, cts.Token);
-        }
-        catch (OperationCanceledException)
-        {
-            // Timeout occurred
-            _loggingService.LogWarning($"Timeout checking path: {networkPath}");
-            return false;
+            });
+
+            var completed = await Task.WhenAny(ioTask, Task.Delay(PathCheckTimeout));
+            if (completed != ioTask)
+            {
+                // Timeout occurred
+                _loggingService.LogWarning($"Timeout checking path: {networkPath}");
+                return false;
+            }
+
+            return await ioTask;
         }
         catch (Exception)
         {

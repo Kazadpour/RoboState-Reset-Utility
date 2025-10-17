@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +43,18 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     private int _newResetValue = 1;
+
+    // Expose a boolean toggle for the UI while preserving the int value for processing
+    public bool ResetValueEnabled
+    {
+        get => NewResetValue == 1;
+        set => NewResetValue = value ? 1 : 0;
+    }
+
+    partial void OnNewResetValueChanged(int value)
+    {
+        OnPropertyChanged(nameof(ResetValueEnabled));
+    }
 
     [ObservableProperty]
     private string _storeNumber = "";
@@ -92,6 +106,7 @@ public partial class MainViewModel : ObservableObject
             if (foundStores != null)
             {
                 Stores.Add(foundStores);
+                WireUpStore(foundStores);
             }
 
             StatusMessage = $"Scan complete: {GetTotalAccessibleCheckouts()} accessible checkout(s) found";
@@ -198,6 +213,7 @@ public partial class MainViewModel : ObservableObject
         {
             store.IsSelected = true;
         }
+        UpdateResetToggleFromSelection();
     }
 
     [RelayCommand]
@@ -207,6 +223,7 @@ public partial class MainViewModel : ObservableObject
         {
             store.IsSelected = false;
         }
+        UpdateResetToggleFromSelection();
     }
 
     [RelayCommand]
@@ -286,6 +303,71 @@ public partial class MainViewModel : ObservableObject
         while (LogMessages.Count > 100)
         {
             LogMessages.RemoveAt(0);
+        }
+    }
+
+    private void WireUpStore(Store store)
+    {
+        foreach (var sco in store.SelfCheckouts)
+        {
+            sco.PropertyChanged += SelfCheckout_PropertyChanged;
+        }
+
+        if (store.SelfCheckouts is INotifyCollectionChanged incc)
+        {
+            incc.CollectionChanged += (s, e) =>
+            {
+                if (e.NewItems != null)
+                {
+                    foreach (var item in e.NewItems)
+                    {
+                        if (item is SelfCheckout sc)
+                        {
+                            sc.PropertyChanged += SelfCheckout_PropertyChanged;
+                        }
+                    }
+                }
+                if (e.OldItems != null)
+                {
+                    foreach (var item in e.OldItems)
+                    {
+                        if (item is SelfCheckout sc)
+                        {
+                            sc.PropertyChanged -= SelfCheckout_PropertyChanged;
+                        }
+                    }
+                }
+            };
+        }
+    }
+
+    private void SelfCheckout_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SelfCheckout.IsSelected) || e.PropertyName == nameof(SelfCheckout.CurrentResetValue))
+        {
+            UpdateResetToggleFromSelection();
+        }
+    }
+
+    private void UpdateResetToggleFromSelection()
+    {
+        var selected = GetSelectedCheckouts();
+        if (selected.Count == 0)
+        {
+            return;
+        }
+
+        // If all selected have the same current value (0 or 1), reflect it.
+        var values = selected
+            .Select(s => s.CurrentResetValue)
+            .Where(v => v.HasValue)
+            .Select(v => v!.Value)
+            .Distinct()
+            .ToList();
+
+        if (values.Count == 1 && (values[0] == 0 || values[0] == 1))
+        {
+            NewResetValue = values[0];
         }
     }
 }
