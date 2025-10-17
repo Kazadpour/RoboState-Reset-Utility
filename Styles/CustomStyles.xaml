@@ -1,11 +1,13 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Colors -->
+    <!-- Colors with Transparency for Glass Effect -->
     <Color x:Key="LondonDrugsRed">#E31837</Color>
     <Color x:Key="FujitsuBlue">#0033A0</Color>
-    <Color x:Key="DarkBackground">#1E1E1E</Color>
-    <Color x:Key="DarkerBackground">#252526</Color>
+    <Color x:Key="DarkBackground">#0A0A0F</Color>
+    <Color x:Key="DarkerBackground">#15151F</Color>
+    <Color x:Key="GlassBackground">#30FFFFFF</Color>
+    <Color x:Key="GlassBorder">#50FFFFFF</Color>
     <Color x:Key="LightText">#FFFFFF</Color>
     <Color x:Key="SuccessGreen">#4CAF50</Color>
     <Color x:Key="ErrorRed">#F44336</Color>
@@ -16,20 +18,31 @@
     <SolidColorBrush x:Key="FujitsuBlueBrush" Color="{StaticResource FujitsuBlue}" />
     <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{StaticResource DarkBackground}" />
     <SolidColorBrush x:Key="DarkerBackgroundBrush" Color="{StaticResource DarkerBackground}" />
+    <SolidColorBrush x:Key="GlassBackgroundBrush" Color="{StaticResource GlassBackground}" />
+    <SolidColorBrush x:Key="GlassBorderBrush" Color="{StaticResource GlassBorder}" />
     <SolidColorBrush x:Key="LightTextBrush" Color="{StaticResource LightText}" />
     <SolidColorBrush x:Key="SuccessGreenBrush" Color="{StaticResource SuccessGreen}" />
     <SolidColorBrush x:Key="ErrorRedBrush" Color="{StaticResource ErrorRed}" />
     <SolidColorBrush x:Key="WarningOrangeBrush" Color="{StaticResource WarningOrange}" />
 
-    <!-- Card Style -->
+    <!-- Glass Card Style with Frosted Effect -->
     <Style x:Key="CustomCard" TargetType="Border">
-        <Setter Property="Background" Value="{StaticResource DarkerBackgroundBrush}" />
-        <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="Padding" Value="16" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#35FFFFFF" Offset="0"/>
+                    <GradientStop Color="#20FFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="Padding" Value="20" />
         <Setter Property="Margin" Value="8" />
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.3" />
+                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.5" Color="#000000"/>
             </Setter.Value>
         </Setter>
     </Style>
@@ -50,7 +63,7 @@
         <Setter Property="Margin" Value="0,8,0,8" />
     </Style>
 
-    <!-- Modern Button Styles -->
+    <!-- Modern Glass Button Styles -->
     <Style x:Key="ModernButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource FujitsuBlueBrush}" />
         <Setter Property="Foreground" Value="White" />
@@ -63,16 +76,19 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
-                            CornerRadius="4"
+                            CornerRadius="10"
                             Padding="{TemplateBinding Padding}">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.5" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.(SolidColorBrush.Color)}"/>
+                        </Border.Effect>
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" Value="0.9"/>
+                            <Setter Property="Opacity" Value="0.85"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Opacity" Value="0.4"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -81,9 +97,13 @@
     </Style>
 
     <Style x:Key="OutlinedButton" TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#20FFFFFF"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderBrush" Value="#555555" />
+        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="16,8" />
         <Setter Property="FontSize" Value="14" />
@@ -94,16 +114,20 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4"
+                            CornerRadius="10"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#303030"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#40FFFFFF"/>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Opacity" Value="0.4"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -111,11 +135,61 @@
         </Setter>
     </Style>
 
-    <!-- ComboBox Style -->
-    <Style TargetType="ComboBox">
-        <Setter Property="Background" Value="{StaticResource DarkerBackgroundBrush}" />
+    <!-- Glass TextBox Style -->
+    <Style x:Key="GlassTextBox" TargetType="TextBox">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#25FFFFFF"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="BorderBrush" Value="#555555" />
+        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CaretBrush" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10"
+                            Padding="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      VerticalAlignment="Center"
+                                      Margin="0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#35FFFFFF"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource FujitsuBlueBrush}" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#40FFFFFF"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ComboBox Glass Style -->
+    <Style TargetType="ComboBox">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="#25FFFFFF"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="{StaticResource GlassBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="8,4" />
     </Style>
 

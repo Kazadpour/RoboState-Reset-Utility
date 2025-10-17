@@ -42,6 +42,9 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private int _newResetValue = 1;
 
+    [ObservableProperty]
+    private string _storeNumber = "";
+
     public MainViewModel()
     {
         _loggingService = new LoggingService();
@@ -57,8 +60,21 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private async Task ScanNetworkAsync()
     {
+        // Validate store number input
+        if (string.IsNullOrWhiteSpace(StoreNumber))
+        {
+            MessageBox.Show("Please enter a store number.", "Store Number Required", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        if (!int.TryParse(StoreNumber, out int storeNum) || storeNum < 1 || storeNum > 999)
+        {
+            MessageBox.Show("Please enter a valid store number (1-999).", "Invalid Store Number", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
         IsScanning = true;
-        StatusMessage = "Scanning network...";
+        StatusMessage = $"Scanning Store {storeNum:D3}...";
         LogMessages.Clear();
         Stores.Clear();
         ProgressValue = 0;
@@ -71,12 +87,15 @@ public partial class MainViewModel : ObservableObject
                 AddLogMessage(message);
             });
 
-            var foundStores = await _networkScanService.ScanNetworkAsync(progress);
+            var foundStores = await _networkScanService.ScanStoreAsync(storeNum, progress);
 
-            Stores = foundStores;
+            if (foundStores != null)
+            {
+                Stores.Add(foundStores);
+            }
 
             StatusMessage = $"Scan complete: {GetTotalAccessibleCheckouts()} accessible checkout(s) found";
-            AddLogMessage($"✓ Found {Stores.Count} store(s) with accessible checkouts");
+            AddLogMessage($"✓ Found {GetTotalAccessibleCheckouts()} accessible checkout(s) in Store {storeNum:D3}");
         }
         catch (Exception ex)
         {
